@@ -61,3 +61,22 @@ $ sort -r ファイル
 ```
 逆順でソートする
 
+
+# 4: 	"Tokyo": can't serve web file
+## curlして返ってこなかったらiptableを見る
+```sh
+$ iptable -L
+```
+
+curlしても何も返ってこない場合ネットワークがブロックされている可能性が高いので、iptableの設定を見る必要がある。
+
+
+## 403forbiddenが出た場合
+参照するファイルの所有権を変更する必要があるが、参照するサーバーのシステムユーザーに権限があれば十分
+
+```sh
+# ダメな例
+$ chmod 644 /var/www/html/index.html
+# 良い例
+$ chown www-data: /var/www/html/index.html
+```
